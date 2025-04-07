@@ -1,0 +1,98 @@
+﻿<Window x:Class="CalPT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:CalPT"
+        Title="Ruleta de Participaciones"
+        Height="550" Width="638"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="Roboto">
+
+    <materialDesign:DialogHost x:Name="GanadorDialogHost">
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Margin="20" HorizontalAlignment="Center">
+                <TextBlock x:Name="GanadorTexto"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           TextAlignment="Center"
+                           Margin="0 0 0 10"/>
+                <Button Content="Cerrar"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="CerrarDialogo_Click"
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+
+        <DockPanel Margin="16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <!-- Parámetros de participación -->
+                    <StackPanel Grid.Row="0" DockPanel.Dock="Top" Orientation="Horizontal" Margin="0 0 0 8">
+                        <TextBox x:Name="ValorBaseInput"
+                          Width="120"
+                          Margin="0 0 8 0"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          materialDesign:HintAssist.Hint="Valor base (mínimo)"/>
+                        <TextBox x:Name="ExtraPorInput"
+                          Width="120"
+                          Margin="0 0 8 0"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          materialDesign:HintAssist.Hint="Cada + (por participación)"/>
+                    </StackPanel>
+
+                    <!-- Datos de participante -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBox x:Name="NombreInput"
+                            Width="180"
+                            Margin="0 0 8 0"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            materialDesign:HintAssist.Hint="Nombre"/>
+                        <TextBox x:Name="ValorInput"
+                            Width="100"
+                            Margin="0 0 8 0"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            materialDesign:HintAssist.Hint="Valor aportado"/>
+                        <Button Content="Agregar"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Click="Agregar_Click"/>
+                    </StackPanel>
+
+                    <!-- Acciones -->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <Button Content="Mezclar Lista"
+                        Margin="8 0"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Click="Mezclar_Click"/>
+                        <Button Content="Mostrar Lista"
+                        Margin="8 0"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Click="MostrarLista_Click"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <DataGrid x:Name="ParticipantesList"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        Margin="0 0 0 16"
+                        RowHeight="32"
+                        Style="{StaticResource MaterialDesignDataGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
+                            <DataGridTextColumn Header="Valor" Binding="{Binding Valor}" Width="*" />
+                            <DataGridTextColumn Header="Participaciones" Binding="{Binding Participaciones}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </materialDesign:DialogHost>
+</Window>
